@@ -41,6 +41,8 @@ php artisan serve
 
 Tidak perlu `npm install` — CSS dan JS sudah berupa file biasa di `public/css` dan `public/js`.
 
+Untuk memasang di VPS, lihat [DEPLOY.md](DEPLOY.md).
+
 ## Fitur
 
 **Website publik**
