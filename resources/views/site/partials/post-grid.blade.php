@@ -5,7 +5,7 @@
         @if($post->image)
           <img src="{{ asset('storage/' . $post->image) }}" alt="" loading="lazy">
         @else
-          <svg viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="#0F3D3E"/><path d="M0 70q40-20 80 0t80 0v30H0z" fill="#3F7D58"/><circle cx="120" cy="30" r="12" fill="#E8B930"/></svg>
+          <svg viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="#1B2565"/><path d="M0 70q40-20 80 0t80 0v30H0z" fill="#2B3990"/><circle cx="120" cy="30" r="12" fill="#E8B930"/></svg>
         @endif
       </div>
       <div class="txt">

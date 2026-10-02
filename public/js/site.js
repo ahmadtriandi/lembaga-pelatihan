@@ -53,3 +53,29 @@ document.querySelectorAll('[data-count]').forEach(el => io.observe(el));
 if (document.querySelector('#daftar .err')) {
   document.getElementById('daftar').scrollIntoView();
 }
+
+// Lightbox foto fasilitas
+const lightbox = document.getElementById('lightbox');
+if (lightbox) {
+  document.querySelectorAll('[data-lightbox]').forEach(btn => btn.addEventListener('click', () => {
+    lightbox.querySelector('img').src = btn.dataset.lightbox;
+    lightbox.querySelector('img').alt = btn.dataset.caption;
+    lightbox.querySelector('p').textContent = btn.dataset.caption;
+    lightbox.showModal();
+  }));
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.close(); });
+}
+
+// Tombol tema terang/gelap; pilihan disimpan di browser pengunjung
+const themeBtn = document.querySelector('.theme-toggle');
+if (themeBtn) {
+  const isDark = () => (document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')) === 'dark';
+  const label = () => themeBtn.setAttribute('aria-label', isDark() ? 'Ganti ke tema terang' : 'Ganti ke tema gelap');
+  label();
+  themeBtn.addEventListener('click', () => {
+    const next = isDark() ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    label();
+  });
+}

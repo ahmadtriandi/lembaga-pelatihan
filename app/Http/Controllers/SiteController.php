@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Client;
+use App\Models\Facility;
 use App\Models\Gallery;
 use App\Models\Post;
 use App\Models\Program;
@@ -18,6 +19,7 @@ class SiteController extends Controller
         return view('site.home', [
             'categories' => Category::orderBy('sort_order')->get(),
             'programs' => Program::with('category')->where('is_active', true)->orderBy('sort_order')->get(),
+            'facilities' => Facility::orderBy('sort_order')->latest()->get()->groupBy('type'),
             'galleries' => Gallery::latest()->take(12)->get(),
             'clients' => Client::latest()->get(),
             'testimonials' => Testimonial::where('is_active', true)->latest()->take(6)->get(),

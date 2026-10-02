@@ -8,6 +8,8 @@
         ['stat_alumni', 'Alumni pelatihan'], ['stat_experts', 'Tenaga ahli'],
         ['stat_programs', 'Skema sertifikasi'], ['stat_rating', 'Penilaian peserta'],
     ];
+    // Warna latar berselang-seling putih/biru; hanya section yang tampil yang dihitung
+    $band = function () { static $i = 0; return $i++ % 2 ? 'band-blue' : 'band-white'; };
 @endphp
 
 @section('content')
@@ -47,7 +49,7 @@
   </div>
 </section>
 
-<section class="pillars" aria-label="Keunggulan">
+<section class="pillars band-white" aria-label="Keunggulan">
   <div class="wrap">
     <div class="grid">
       <div class="pillar">
@@ -69,15 +71,15 @@
   </div>
 </section>
 
-<section class="about" id="tentang">
+<section class="about {{ $band() }}" id="tentang">
   <div class="wrap">
     <div class="about-visual">
       @if(!empty($site['about_image']))
         <img src="{{ asset('storage/' . $site['about_image']) }}" alt="Kegiatan {{ $site['site_name'] ?? '' }}">
       @else
         <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <rect width="400" height="500" fill="#3F7D58"/><circle cx="300" cy="110" r="60" fill="#E8B930"/>
-          <path d="M0 330 120 220l90 70 80-60 110 90v180H0z" fill="#0F3D3E"/>
+          <rect width="400" height="500" fill="#2B3990"/><circle cx="300" cy="110" r="60" fill="#E8B930"/>
+          <path d="M0 330 120 220l90 70 80-60 110 90v180H0z" fill="#1B2565"/>
         </svg>
       @endif
     </div>
@@ -99,7 +101,7 @@
   </div>
 </section>
 
-<section class="programs" id="program">
+<section class="programs {{ $band() }}" id="program">
   <div class="wrap">
     <div class="prog-head">
       <div>
@@ -115,7 +117,7 @@
     </div>
     <div class="prog-list">
       @forelse($programs as $p)
-        <article class="prog" data-cat="{{ $p->category?->slug }}" style="--c:{{ $p->category?->color ?? '#3F7D58' }}">
+        <article class="prog" data-cat="{{ $p->category?->slug }}" style="--c:{{ $p->category?->color ?? '#2B3990' }}">
           @if($p->image)<img class="prog-img" src="{{ asset('storage/' . $p->image) }}" alt="{{ $p->name }}" loading="lazy">@endif
           <div class="prog-top">
             <div class="prog-meta">
@@ -141,7 +143,62 @@
   </div>
 </section>
 
-<section class="steps">
+@if($facilities->isNotEmpty())
+<section class="facilities {{ $band() }}" id="fasilitas">
+  <div class="wrap">
+    <h2>Fasilitas peserta</h2>
+    <p class="lead">Yang Anda dapatkan setelah mengikuti pelatihan bersama kami.</p>
+    @foreach(['fasilitas' => null, 'aksesoris' => ['Aksesoris peserta', 'Perlengkapan yang dibagikan kepada setiap peserta pelatihan.']] as $type => $heading)
+      @if($facilities->has($type))
+        @if($heading)
+          <div class="fac-sub">
+            <h3>{{ $heading[0] }}</h3>
+            <p>{{ $heading[1] }}</p>
+          </div>
+        @endif
+        <div class="fac-grid {{ $type === 'aksesoris' ? 'fac-grid-sm' : '' }}">
+          @foreach($facilities[$type] as $f)
+            <figure class="fac">
+              <button type="button" class="fac-img" data-lightbox="{{ asset('storage/' . $f->image) }}" data-caption="{{ $f->title }}" aria-label="Perbesar foto {{ $f->title }}">
+                <img src="{{ asset('storage/' . $f->image) }}" alt="{{ $f->title }}" loading="lazy">
+              </button>
+              <figcaption>
+                <b>{{ $f->title }}</b>
+                @if($f->description)<span>{{ $f->description }}</span>@endif
+              </figcaption>
+            </figure>
+          @endforeach
+        </div>
+      @endif
+    @endforeach
+  </div>
+</section>
+
+<dialog class="lightbox" id="lightbox" aria-label="Foto fasilitas">
+  <form method="dialog"><button class="lb-close" aria-label="Tutup">&times;</button></form>
+  <img src="" alt="">
+  <p></p>
+</dialog>
+@endif
+
+@if(!empty($site['schedule_image']))
+<section class="schedule {{ $band() }}" id="jadwal">
+  <div class="wrap">
+    <div class="sched-head">
+      <div>
+        <h2>Jadwal pelatihan</h2>
+        <p class="lead">Jadwal kelas terdekat beserta biaya dan fasilitas peserta.</p>
+      </div>
+      @if($wa)<a class="btn btn-moss" href="{{ $waLink('Halo, saya ingin menanyakan jadwal pelatihan.') }}">Tanya jadwal via WhatsApp</a>@endif
+    </div>
+    <a class="sched-img" href="{{ asset('storage/' . $site['schedule_image']) }}" target="_blank" rel="noopener" title="Buka gambar ukuran penuh">
+      <img src="{{ asset('storage/' . $site['schedule_image']) }}" alt="Jadwal pelatihan dan sertifikasi BNSP" loading="lazy">
+    </a>
+  </div>
+</section>
+@endif
+
+<section class="steps {{ $band() }}">
   <div class="wrap">
     <h2>Alur pendaftaran</h2>
     <p class="lead">Dari konsultasi sampai sertifikat terbit.</p>
@@ -155,7 +212,7 @@
 </section>
 
 @if($galleries->isNotEmpty())
-<section id="galeri" style="padding-top:0">
+<section class="{{ $band() }}" id="galeri">
   <div class="wrap">
     <h2>Galeri kegiatan</h2>
     <p class="lead">Momen dari kelas pelatihan dan uji kompetensi kami.</p>
@@ -184,7 +241,7 @@
 </section>
 
 @if($clients->isNotEmpty())
-<section>
+<section class="{{ $band() }}">
   <div class="wrap">
     <h2>Klien kami</h2>
     <p class="lead">Perusahaan yang telah mengirim personelnya berlatih bersama kami.</p>
@@ -200,7 +257,7 @@
 @endif
 
 @if($testimonials->isNotEmpty())
-<section class="testi">
+<section class="testi {{ $band() }}">
   <div class="wrap">
     <h2>Kata alumni</h2>
     <p class="lead">Pengalaman peserta yang sudah mengikuti pelatihan kami.</p>
@@ -222,7 +279,7 @@
 </section>
 @endif
 
-<section class="register" id="daftar">
+<section class="register {{ $band() }}" id="daftar">
   <div class="wrap">
     <div>
       <h2>Daftar pelatihan</h2>
@@ -274,7 +331,7 @@
 </section>
 
 @if($posts->isNotEmpty())
-<section>
+<section class="{{ $band() }}">
   <div class="wrap">
     <h2>Artikel terbaru</h2>
     <p class="lead">Informasi seputar regulasi, sertifikasi, dan pengembangan kompetensi.</p>
@@ -284,7 +341,7 @@
 </section>
 @endif
 
-<section class="cta" style="{{ $posts->isEmpty() ? 'padding-top:88px' : '' }}">
+<section class="cta {{ $band() }}">
   <div class="wrap">
     <div class="cta-box">
       <h2>Konsultasikan kebutuhan pelatihan tim Anda hari ini.</h2>

@@ -48,9 +48,10 @@ class SettingController extends Controller
         $rules['logo'] = ['nullable', 'image', 'max:2048'];
         $rules['hero_image'] = ['nullable', 'image', 'max:4096'];
         $rules['about_image'] = ['nullable', 'image', 'max:4096'];
+        $rules['schedule_image'] = ['nullable', 'image', 'max:8192'];
         $data = $request->validate($rules);
 
-        foreach (['logo', 'hero_image', 'about_image'] as $img) {
+        foreach (['logo', 'hero_image', 'about_image', 'schedule_image'] as $img) {
             unset($data[$img]);
             if ($request->hasFile($img)) {
                 $data[$img] = $this->upload($request, $img, 'settings', Setting::get($img));

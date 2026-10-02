@@ -16,7 +16,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return view('admin.categories.form', ['category' => new Category(['color' => '#3F7D58'])]);
+        return view('admin.categories.form', ['category' => new Category(['color' => '#2B3990'])]);
     }
 
     public function store(Request $request)

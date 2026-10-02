@@ -9,6 +9,7 @@
             ['admin.categories.index', 'Bidang', 'admin.categories.*'],
             ['admin.posts.index', 'Artikel', 'admin.posts.*'],
             ['admin.galleries.index', 'Galeri', 'admin.galleries.*'],
+            ['admin.facilities.index', 'Fasilitas', 'admin.facilities.*'],
             ['admin.clients.index', 'Klien', 'admin.clients.*'],
             ['admin.testimonials.index', 'Testimoni', 'admin.testimonials.*'],
         ],

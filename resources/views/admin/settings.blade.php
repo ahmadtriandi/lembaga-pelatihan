@@ -12,6 +12,7 @@
       @include('admin.partials.image-field', ['name' => 'logo', 'label' => 'Logo', 'current' => $values['logo'] ?? null])
       @include('admin.partials.image-field', ['name' => 'hero_image', 'label' => 'Gambar hero (opsional, menggantikan stempel)', 'current' => $values['hero_image'] ?? null])
       @include('admin.partials.image-field', ['name' => 'about_image', 'label' => 'Foto bagian Tentang kami', 'current' => $values['about_image'] ?? null])
+      @include('admin.partials.image-field', ['name' => 'schedule_image', 'label' => 'Gambar jadwal pelatihan (maks. 8 MB)', 'current' => $values['schedule_image'] ?? null])
     </div>
   </div>
 
