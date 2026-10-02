@@ -23,7 +23,7 @@
 {{-- Terapkan tema pilihan pengunjung sebelum halaman tampil (tanpa kedip). Tanpa pilihan: ikut pengaturan perangkat. --}}
 <script>try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}</script>
 </head>
-<body>
+<body id="top">
 
 <div class="topbar">
   <div class="wrap">
@@ -40,7 +40,7 @@
   </div>
 </div>
 
-<header class="nav" id="top">
+<header class="nav">
   <div class="wrap">
     <a class="brand" href="{{ route('home') }}">
       @if(!empty($site['logo']))
