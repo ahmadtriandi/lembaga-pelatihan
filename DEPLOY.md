@@ -115,7 +115,7 @@ Database dari laptop masih memakai akun bawaan `admin@namalembaga.co.id` / `pass
 Ganti **sebelum** website dibuka ke publik:
 
 ```bash
-php artisan tinker --execute="\$u = App\Models\User::first(); \$u->email = 'email-anda@domain.com'; \$u->password = Hash::make('PasswordBaruYangKuat'); \$u->save(); echo 'OK';"
+php artisan tinker --execute="\$u = App\Models\User::first(); \$u->email = 'admin@training-mds.com'; \$u->password = Hash::make('Admin123'); \$u->save(); echo 'OK';"
 ```
 
 ## 6. Konfigurasi web server

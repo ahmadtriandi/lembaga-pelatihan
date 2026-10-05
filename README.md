@@ -84,3 +84,15 @@ Untuk memasang di VPS, lihat [DEPLOY.md](DEPLOY.md).
 - Isi artikel ditampilkan sebagai HTML. Berikan akses dashboard hanya kepada admin tepercaya.
 - Formulir pendaftaran dibatasi 5 kiriman per menit per IP; login dibatasi 10 percobaan per menit.
 - Saat online, set `APP_ENV=production` dan `APP_DEBUG=false`.
+
+
+
+
+
+admin baru 
+$u = App\Models\User::first();
+$u->name = 'admin';
+$u->email = 'admin@training-mds.com';
+$u->password = Hash::make('admin123');
+$u->save();
+exit
