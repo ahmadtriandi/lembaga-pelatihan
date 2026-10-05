@@ -41,3 +41,6 @@
   .gal-track,.gal-track.fits{grid-auto-columns:82%;overflow-x:auto}
   .gal-nav{display:none}
 }
+
+/* Atribut hidden harus mengalahkan display di atas */
+.gal-modal[hidden], .gal-nav[hidden] { display: none; }

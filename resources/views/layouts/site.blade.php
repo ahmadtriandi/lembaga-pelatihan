@@ -20,6 +20,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/site.css') }}">
+<link rel="stylesheet" href="{{ asset('css/gallery.css') }}">
 {{-- Terapkan tema pilihan pengunjung sebelum halaman tampil (tanpa kedip). Tanpa pilihan: ikut pengaturan perangkat. --}}
 <script>try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}</script>
 </head>
@@ -121,5 +122,6 @@
 @endif
 
 <script src="{{ asset('js/site.js') }}" defer></script>
+<script src="{{ asset('js/gallery.js') }}" defer></script>
 </body>
 </html>

@@ -211,22 +211,7 @@
   </div>
 </section>
 
-@if($galleries->isNotEmpty())
-<section class="{{ $band() }}" id="galeri">
-  <div class="wrap">
-    <h2>Galeri kegiatan</h2>
-    <p class="lead">Momen dari kelas pelatihan dan uji kompetensi kami.</p>
-    <div class="gal">
-      @foreach($galleries as $g)
-        <figure>
-          <a href="{{ asset('storage/' . $g->image) }}" target="_blank"><img src="{{ asset('storage/' . $g->image) }}" alt="{{ $g->title ?? 'Dokumentasi kegiatan' }}" loading="lazy"></a>
-          @if($g->title)<figcaption>{{ $g->title }}</figcaption>@endif
-        </figure>
-      @endforeach
-    </div>
-  </div>
-</section>
-@endif
+@include('site.partials.gallery')
 
 <section class="stats" aria-label="Pencapaian">
   <div class="wrap">

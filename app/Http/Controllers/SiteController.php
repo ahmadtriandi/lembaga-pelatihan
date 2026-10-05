@@ -20,7 +20,7 @@ class SiteController extends Controller
             'categories' => Category::orderBy('sort_order')->get(),
             'programs' => Program::with('category')->where('is_active', true)->orderBy('sort_order')->get(),
             'facilities' => Facility::orderBy('sort_order')->latest()->get()->groupBy('type'),
-            'galleries' => Gallery::latest()->take(12)->get(),
+            'galleries' => Gallery::orderBy('sort_order')->latest()->take(24)->get(),
             'clients' => Client::latest()->get(),
             'testimonials' => Testimonial::where('is_active', true)->latest()->take(6)->get(),
             'posts' => Post::published()->latest('published_at')->take(3)->get(),
