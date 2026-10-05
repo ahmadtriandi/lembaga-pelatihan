@@ -34,6 +34,9 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('testimoni', Admin\TestimonialController::class)->except('show')
         ->parameters(['testimoni' => 'testimonial'])->names('testimonials');
 
+
+    Route::post('galeri/video', [Admin\GalleryController::class, 'storeVideo'])->name('galleries.video');
+    Route::patch('galeri/{gallery}/urutan', [Admin\GalleryController::class, 'sort'])->name('galleries.sort');    
     Route::resource('galeri', Admin\GalleryController::class)->only(['index', 'store', 'destroy'])
         ->parameters(['galeri' => 'gallery'])->names('galleries');
     Route::resource('fasilitas', Admin\FacilityController::class)->only(['index', 'store', 'destroy'])
